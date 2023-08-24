@@ -1,0 +1,71 @@
+<div class="container">
+  <mat-drawer-container class="drawer-container" autosize>
+    <div class="main-content">
+      <div class="map">
+        <app-map [dataList]="markersList"></app-map>
+      </div>
+      <div class="icon">
+        <button type="button" mat-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-drawer
+      #drawer
+      class="example-sidenav"
+      opened
+      mode="side"
+      position="end"
+    >
+      <div class="drawer-slider">
+        <div class="form-field">
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Environmental Feature</mat-label>
+            <mat-select>
+              <mat-option value="one">Air Quality</mat-option>
+              <mat-option value="two">Temperature</mat-option>
+              <mat-option value="three">Rainfall</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+            <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>AQI Band</mat-label>
+        <mat-select [(ngModel)]="readingStatus" (ngModelChange)="getAllMarkers()">
+          <mat-option value="(all)">(All)</mat-option>
+          <mat-option value="good">Good</mat-option>
+          <mat-option value="fair">Fair</mat-option>
+          <mat-option value="poor">Poor</mat-option>
+          <mat-option value="veryPoor">Very Poor</mat-option>
+          
+        </mat-select>
+      </mat-form-field>
+        </div>
+        <mat-card class="card" *ngFor="let item of markersList; let i = index" (click)="flyOnMap(item)"
+        [ngClass]="{'color-green-1': item.aqi == 1, 'color-green-2': item.aqi == 2,'color-green-3': item.aqi == 3,
+        'color-yellow-1': item.aqi == 4, 'color-yellow-2': item.aqi == 5, 'color-yellow-3': item.aqi == 6, 
+        'color-red-1': item.aqi == 7,'color-red-2': item.aqi == 8,'color-red-3': item.aqi == 9, 'color-purple-1': item.aqi == 10 }">
+          <mat-card-header>
+            <mat-card-title>Lat {{ item.lat }}</mat-card-title>
+            <mat-card-title>Long {{ item.lon }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h3>Date: {{ item.date }}</h3>
+            <h3>Time: {{ item.time }}</h3>
+            <h3>AQI: {{ item.aqi }}</h3>
+            <h3>CO: {{ item.co }}</h3>
+            <h3>NO: {{ item.no }}</h3>
+            <h3>NO2: {{ item.no2 }}</h3>
+            <h3>O3: {{ item.o3 }}</h3>
+            <h3>SO2: {{ item.so2 }}</h3>
+            <h3>PM2_5: {{ item.pm2_5 }}</h3>
+            <h3>PM10: {{ item.pm10 }}</h3>
+            <h3>NH3: {{ item.nh3 }}</h3>
+          </mat-card-content>
+          <!-- <mat-card-actions>
+              <button mat-button>LIKE</button>
+              <button mat-button>SHARE</button>
+            </mat-card-actions> -->
+        </mat-card>
+      </div>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

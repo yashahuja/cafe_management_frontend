@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-toolbar class="primary-color">
+    <div class="app-name">
+      <span>Interactive Environmental Map</span>
+    </div>
+    <div class="nav-list">
+      <span *ngFor="let item of links" class="primary-color">
+        <a (click)="checkLogin(item)"
+         mat-button [routerLink]="[item.path]">
+         <mat-icon class="icon-display">{{item.icon}}</mat-icon>
+         {{ item.name }}</a></span>
+         <button mat-button [matMenuTriggerFor]="menu" *ngIf="isLoggedIn">
+          <mat-icon class="icon-display">account_circle</mat-icon>
+          User</button>
+         <mat-menu #menu="matMenu">
+           <h2 class="display-name">{{ displayName | uppercase }}</h2>
+           <button mat-menu-item>
+            <a (click)="checkLogin('Logout')"
+            mat-button>
+            <mat-icon class="icon-display">logout</mat-icon>
+            Logout</a></button>
+         </mat-menu>
+    </div>
+  </mat-toolbar>
+</div>

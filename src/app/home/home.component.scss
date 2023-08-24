@@ -1,0 +1,74 @@
+@import '../../variable';
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper{
+  margin: 0 !important;
+  padding: 0;
+  display: none;
+}
+.container{
+  height: 100%;
+  width: 100%;
+  // background-color: yellow;
+  position: relative;
+
+  .drawer-container {
+    width: 100%;
+    height: 100%;
+    .main-content{
+      display: flex;
+      align-items: stretch;
+      height: 99%;
+
+      .map{
+        flex-grow: 100;
+        // background-color: yellow;
+        position: relative;
+      }
+      .icon{
+        // background-color: green;
+        text-align: right;
+        flex-grow: 1;
+        mat-icon{
+          font-size: 3rem;
+          width: 3rem;
+          height: auto;
+          color: $dark-text;
+        }
+      }
+
+    }
+
+    .drawer-slider{
+      width: 100%;
+      height: 100%;
+      // padding-top: 1rem;
+      // padding-right: 1rem;
+      padding: 0 2rem;
+      padding-top: 1rem;
+      font-size: 1rem;
+      .form-field{
+        margin-bottom: 1rem;
+        button{
+          width: 100%;
+        }       
+        text-align: center;
+      }
+      .seperator{
+        margin-bottom: 3rem;
+        border-bottom: 0.2rem solid $dark-text;
+        padding-bottom: 3rem;
+      }
+    }
+  }
+}
+
+.radio-group{
+  display: block;
+  margin-right: 2rem;
+}
+
+.radio-label{
+  width: 100%;
+  display: inline-block;
+  font-size: 1.4rem;
+}

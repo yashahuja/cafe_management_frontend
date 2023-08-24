@@ -1,0 +1,44 @@
+@import '../../variable';
+.container{
+    height: 100%;
+    width: 100%;
+    background-image: url('../../assets/images/map_bg.jpg');
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+
+    .card{
+        position: relative;
+        top: 50%;
+        transform: translate(0%, -50%);
+    }
+
+    .example-card {
+        max-width: 40rem;
+        margin-bottom: 8px;
+        margin: auto;
+        border: 1rem solid $primary;
+        border-radius: 10%;
+
+        .mat-mdc-card-title-group{
+            justify-content: center !important;   
+        }
+        .form{
+            margin-top: 2rem;
+            text-align: center;
+            button{
+                margin: 1rem
+            }
+        }
+        mat-form-field{
+            width: 100%;
+            padding: 0 2rem;
+        }
+    }
+
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white !important;
+    border-radius: 5px;
+  }

@@ -1,0 +1,114 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/leaflet/dist/leaflet.css";
+@import "../node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'variable';
+
+// $primary: #024a56;
+// $primary-2: #4d998f;
+// $secondary: #dee1b3;
+// $light-text: #fff;
+// $dark-text: $primary;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+:root{
+    font-size: 62.5%;
+    padding: 0;
+    margin: 0;
+    /* background-image: url(image/about-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.primary-color{
+    background-color: $primary !important;
+}
+.primary-color-2{
+    background-color: $primary-2
+}
+
+.secondary-color{
+    background-color: $secondary !important;
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip{
+    background-color: $primary-2 !important;
+    color: $light-text !important;
+    border: 0.4rem solid $dark-text;
+    h3, h1{
+        margin-bottom: -0.5rem !important;
+    }
+   }
+
+// .leaflet-popup, .leaflet-zoom-animated{
+//     // bottom: 3rem !important;
+//     // z-index: 992 !important;
+// }
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background-color: $primary !important;
+    text-align: center !important;
+    margin-top: 5rem;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label{
+    color: $light-text !important;
+}
+
+.text-center{
+    text-align: center;
+}
+.text-left{
+    text-align: left;
+}
+
+.color-green-1{
+    background-color: #99d35c !important;
+}
+.color-green-2{
+    background-color: #15b45f !important;
+}
+.color-green-3{
+    background-color: #318e5b !important;
+    color: beige !important;
+}
+.color-yellow-1{
+    background-color: #fffa10 !important;
+}
+.color-yellow-2{
+    background-color: #ffc30f !important;
+}
+.color-yellow-3{
+    background-color: #e4791e !important;
+    color: beige !important;
+}
+.color-red-1{
+    background-color: #ff2d0e !important;
+    color: beige !important;
+}
+.color-red-2{
+    background-color: #c7321e !important;
+    color: beige !important;
+}
+.color-red-3{
+    background-color: #791a14 !important;
+    color: beige !important;
+}
+.color-purple-1{
+    background-color: #7031a0 !important;
+    color: beige !important;
+}

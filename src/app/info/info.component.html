@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
+  </div>
+  <div class="controls">
+    <form class="example-form">
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Select Lat-Long</mat-label>
+        <input type="text" matInput [formControl]="myControl" [(ngModel)]="selectedCoords" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" >
+          <mat-option *ngFor="let item of filteredOptions | async" value = "{{('lat: '+item.lat+', '+'lon: '+item.lon)}}">
+            <span>lat: {{item.lat}}, lon: {{item.lon}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate name="start" [(ngModel)]="startDate" placeholder="Start date">
+          <input matEndDate name="end" [(ngModel)]="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Environmental Feature</mat-label>
+        <mat-select [(value)]="featureType">
+          <mat-option value="1">Aqi</mat-option>
+          <mat-option value="2">Co</mat-option>
+          <mat-option value="3">No</mat-option>
+          <mat-option value="4">No2</mat-option>
+          <mat-option value="5">O3</mat-option>
+          <mat-option value="6">SO2</mat-option>
+          <mat-option value="7">PM2_5</mat-option>
+          <mat-option value="8">PM10</mat-option>
+          <mat-option value="9">NH3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button class="primary-color"
+      type="submit" [disabled]="!startDate || !endDate || !selectedCoords || !featureType" (click)="createChart()">
+        Create Chart
+      </button>
+  </div>
+</div>

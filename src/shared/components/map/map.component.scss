@@ -1,0 +1,60 @@
+@import '../../../variable';
+.map-container {
+    height: 100%;
+    width: 99%;
+    text-align: center;
+    margin: 0 2rem;
+
+}
+
+.map-frame {
+    height: 100%;
+    width: 100%;
+    position: relative;
+// border: 5px solid black;
+// height: 100%;
+// width: 90%;
+// position: absolute;
+
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.aqi-index-description{
+    position: absolute;
+    bottom: 0;
+    left: 14rem;
+    table {
+        border-spacing:1rem;
+        tbody{
+            tr{
+                td{
+                    &:nth-child(2n+1){
+                        text-align: left;
+                    }
+                    &:nth-child(2n){
+                        // background-color: aqua;
+                        display: block;
+                        width: 70%;
+                        height: 70%;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+    .air-legend{
+        background-color: beige;
+        padding: 0.1rem;
+        width: 10rem;
+        opacity: 0.8;
+    }
+}
+
+// table.g-hidden-xs-down {
+//     // background: whitesmoke;
+//     padding: 1rem;
+// }

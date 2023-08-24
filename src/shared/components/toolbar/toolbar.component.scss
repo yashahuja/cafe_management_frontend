@@ -1,0 +1,35 @@
+@import '../../../variable';
+.container{
+  margin: 0;
+  padding: 0;
+  mat-toolbar{
+    justify-content: space-between;
+    color: $light-text;
+  }
+  
+  .nav-list{
+    span {
+      a{
+        margin-right: 1rem;
+        color: $light-text;
+        
+      }
+      a:hover{
+        background-color: $primary-2;
+      }
+    }
+  }
+}
+
+.icon-display {
+  transform: scale(2);
+}
+
+.display-name{
+    display: inline-block;
+    width: 100% !important;
+    text-align: center;
+    padding: 1.5rem !important;
+    background-color: $primary;
+    color: $light-text;
+  }

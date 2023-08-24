@@ -1,0 +1,146 @@
+<div class="container">
+  <mat-drawer-container class="drawer-container" autosize>
+    <div class="main-content">
+      <div class="map">
+        <app-map [dataList]="markersList"></app-map>
+      </div>
+      <div class="icon">
+        <button type="button" mat-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-drawer #drawer mode="side" position="end">
+      <div class="drawer-slider">
+        <form #myForm="ngForm" (ngSubmit) = "myForm.valid && saveAndVisualize()">
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput readonly name="date" type="text" [(ngModel)]="currDate" />
+            </mat-form-field>
+          </div>
+          <div class="form-field seperator">
+            <mat-form-field appearance="outline">
+              <mat-label>Time</mat-label>
+              <input matInput readonly name="time" type="text" [(ngModel)]="currTime" />
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Latitude </mat-label>
+              <input matInput name="latitude" type="number" [(ngModel)]="currLat" required/>
+            </mat-form-field>
+          </div>
+
+          <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Longitude</mat-label>
+              <input matInput  name="longitude" type="number" [(ngModel)]="currLong" required/>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="userRole !== 'viewer'" class="form-field seperator">
+            <button
+              mat-raised-button
+              class="secondary-color"
+              type="button"
+              (click)="getCurrentLocationCoordinates()"
+            >
+              Get your coordinates
+            </button>
+          </div>
+
+          <div *ngIf="userRole === 'viewer'" class="form-field seperator">
+            <button
+              mat-raised-button
+              class="secondary-color"
+              type="button"
+              (click)="goToYourCoordinates()"
+            >
+              Go to your coordinates
+            </button>
+          </div>
+
+
+          <div *ngIf="userRole !== 'viewer' && currLat && currLong">
+            <mat-label class="text-center radio-label">Fill values: </mat-label>
+            <mat-radio-group class="radio-group" #userRole required name="valuesType" [(ngModel)]="inputWay">
+              <mat-radio-button value = "2" >Manually</mat-radio-button>
+              <mat-radio-button value = "1" >Broadcast</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div *ngIf="userRole !== 'viewer' && currLat && currLong">
+            <div class="form-field" *ngFor="let item of parametersList">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ item.name }}</mat-label>
+                <input matInput [readonly]="inputWay == 1" name={{item.name}} type="number" [(ngModel)]="item.value" required/>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- <div class="form-field" >
+            <mat-form-field appearance="outline">
+              <mat-label>Environmental Feature</mat-label>
+              <mat-select value="one">
+                <mat-option value="one">Air Quality</mat-option>
+                <mat-option value="two">Temperature</mat-option>
+                <mat-option value="three">Rainfall</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+
+          <!-- <div class="form-field">
+            <mat-form-field appearance="outline">
+              <mat-card class="card">
+            <mat-card-header *ngIf="realTimeValues">
+              <mat-card-title><h1>AQI: {{realTimeValues['list'][0]['main']['aqi']}}</h1></mat-card-title>
+              <mat-card-title><h1>Lon: ${item.lon}</h3></mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h3>AQI: ${item.aqi}</h3>
+              <h3>CO: ${item.co}</h3>
+              <h3>NO: ${item.no}</h3>
+              <h3>NO2: ${item.no2}</h3>
+              <h3>O3: ${item.o3}</h3>
+              <h3>SO2: ${item.so2}</h3>
+              <h3>PM2_5: ${item.pm2_5}</h3>
+              <h3>PM10: ${item.pm10}</h3>
+              <h3>NH3: ${item.nh3}</h3>
+            </mat-card-content>
+          </mat-card>
+            </mat-form-field>
+          </div> -->
+
+          <div *ngIf="userRole !== 'viewer' && currLat && currLong" class="form-field seperator">
+            <button
+              mat-raised-button
+              class="secondary-color"
+              type="button"
+              [hidden]="inputWay == 2"
+              (click)="broadCastAqValues($event)"
+            >
+              Broadcast AQ values
+            </button>
+            <!-- <button
+              mat-raised-button
+              color="accent"
+              type="submit"
+              [disabled]="!myForm.valid"
+            >
+              Get the real time values
+            </button> -->
+          </div>
+          <div *ngIf="userRole !== 'viewer' && currLat && currLong" class="form-field seperator">
+            <button
+              mat-raised-button
+              class="secondary-color"
+              type="submit"            >
+              Save & Visualize
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

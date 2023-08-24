@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="card">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Signup</mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form">
+          <form #myForm="ngForm" (ngSubmit)="myForm.valid && signup()">
+            <div class=" ">
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  name="name"
+                  type="text"
+                  required
+                  [(ngModel)]="name"
+                />
+              </mat-form-field>
+            </div>
+            <div class="">
+              <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  name="email"
+                  type="email"
+                  required
+                  [(ngModel)]="email"
+                />
+              </mat-form-field>
+            </div>
+            <div class=" ">
+              <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input
+                  matInput
+                  name="phoneNumber"
+                  type="number"
+                  required
+                  [(ngModel)]="phoneNumber"
+                />
+              </mat-form-field>
+            </div>
+            <div class=" ">
+              <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  name="password"
+                  type="password"
+                  (keyup)="checkPhoneNumber()"
+                  required
+                  [(ngModel)]="password"
+                />
+              </mat-form-field>
+            </div>
+            <div class=" ">
+              <!-- <mat-form-field appearance="outline"> -->
+              <mat-label>Signup as: </mat-label>
+              <mat-radio-group
+                #userRole
+                required
+                name="role"
+                [(ngModel)]="role"
+              >
+                <mat-radio-button value="contributer"
+                  >Contributer</mat-radio-button
+                >
+                <mat-radio-button value="viewer">Viewer</mat-radio-button>
+              </mat-radio-group>
+              <!-- </mat-form-field> -->
+            </div>
+            <div class=" ">
+              <button mat-raised-button class="secondary-color">Submit</button>
+            </div>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
