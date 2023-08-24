@@ -2,10 +2,10 @@ export class AppSettings{
     private static restApiPath: string;
 
     public static setAppConfig(){
-        this.restApiPath = window.location.origin+'/';
-        if(window.location.origin.includes('localhost')){
+        // this.restApiPath = window.location.origin+'/';
+        // if(window.location.origin.includes('localhost')){
             this.restApiPath = 'http://localhost:4000/';
-        }
+        // }
     }
 
     public static get SearchAqiData(): string {return this.restApiPath+'searchAQIdata'; }
