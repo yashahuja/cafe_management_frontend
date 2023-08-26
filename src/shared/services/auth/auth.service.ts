@@ -54,9 +54,9 @@ export class AuthService {
         this.getUserRole(res.user.uid, AppSettings.GetUserRole).subscribe((res: any) => {
           if (res && res.role) {
             AuthService.role.next(res.role);
-            localStorage.setItem('role', res.role);
+            // localStorage.setItem('role', res.role);
           } else {
-            localStorage.setItem('role', 'viewer');
+            // localStorage.setItem('role', 'viewer');
           }
         });
       },
@@ -131,6 +131,7 @@ export class AuthService {
     this.fireAuth.signOut().then(
       () => {
         localStorage.removeItem('token');
+        localStorage.removeItem("user");
         this.router.navigate(['/login']);
         this.eventService.showSuccessMessage(
           msg ? msg : 'User logged out successfully.'
