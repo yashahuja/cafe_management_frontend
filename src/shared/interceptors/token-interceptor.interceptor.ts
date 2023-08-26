@@ -17,6 +17,8 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
     if(token){
       request = request.clone({headers: request.headers.set('Authorization', 'bearer '+token)});
       request = request.clone({headers: request.headers.set('Access-Control-Allow-Origin', '*')});
+      request = request.clone({headers: request.headers.set('Access-Control-Allow-Credentials', 'true')});
+      request = request.clone({headers: request.headers.set('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')});
       return next.handle(request);
     }
     return next.handle(request);
