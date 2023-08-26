@@ -16,6 +16,7 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('token');
     if(token){
       request = request.clone({headers: request.headers.set('Authorization', 'bearer '+token)});
+      request = request.clone({headers: request.headers.set('Access-Control-Allow-Origin', '*')});
       return next.handle(request);
     }
     return next.handle(request);
