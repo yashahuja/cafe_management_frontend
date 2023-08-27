@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { EventService } from '../event/event.service';
@@ -18,7 +18,7 @@ export class AuthService {
   ) {}
 
   sessionId: any;
-  public static role = new Subject();
+  public static role = new BehaviorSubject('');
 
   public isLoggedIn() {
     return localStorage.getItem('token') !== null;

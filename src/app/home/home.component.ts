@@ -17,9 +17,9 @@ import { AppSettings } from '../app.settings';
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe, private homeService: HomeService, private mapService: MapService,
     private eventService: EventService){}
+
   ngOnDestroy() {
     this.userRole = '';
-    AuthService.role.next('');
   }
 
   user:any = {}
