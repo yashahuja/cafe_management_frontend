@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Utility } from 'src/shared/utilities/utility';
 import { DatePipe } from '@angular/common';
 import { HomeService } from './home.service';
@@ -14,9 +14,13 @@ import { AppSettings } from '../app.settings';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe, private homeService: HomeService, private mapService: MapService,
     private eventService: EventService){}
+  ngOnDestroy() {
+    this.userRole = '';
+    AuthService.role.next('');
+  }
 
   user:any = {}
   currLong: any;
