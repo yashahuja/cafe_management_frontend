@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         } else {
           this.eventService.showSuccessMessage(res.message);
           setTimeout(() => {
-            this.eventService.showSuccessMessage('Flying to your coordinates.')
+            this.eventService.showSuccessMessage('Flying near to your coordinates.')
             this.mapService.flyTo(headerList, false);
           }, 1500);
         }
