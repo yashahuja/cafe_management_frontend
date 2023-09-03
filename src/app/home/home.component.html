@@ -25,19 +25,25 @@
               <input matInput readonly name="time" type="text" [(ngModel)]="currTime" />
             </mat-form-field>
           </div>
-
+          <div class="text-center mb-1">
+            <h2>Enter Coordinates:</h2>
+          </div>
           <div class="form-field">
             <mat-form-field appearance="outline">
               <mat-label>Latitude </mat-label>
-              <input matInput name="latitude" type="number" [(ngModel)]="currLat" required/>
+              <input matInput name="latitude" type="number" [(ngModel)]="currLat" (blur)="formatLatLon()" required/>
             </mat-form-field>
           </div>
 
-          <div class="form-field">
+          <div class="form-field mb-1">
             <mat-form-field appearance="outline">
               <mat-label>Longitude</mat-label>
-              <input matInput  name="longitude" type="number" [(ngModel)]="currLong" required/>
+              <input matInput  name="longitude" type="number" [(ngModel)]="currLong" (blur)="formatLatLon()" required/>
             </mat-form-field>
+          </div>
+
+          <div class="text-center mb-1">
+            <h2>----OR----</h2>
           </div>
 
           <div *ngIf="userRole !== 'viewer'" class="form-field seperator">
@@ -47,7 +53,7 @@
               type="button"
               (click)="getCurrentLocationCoordinates()"
             >
-              Get your coordinates
+              Get your location
             </button>
           </div>
 
@@ -66,11 +72,33 @@
           <div *ngIf="userRole !== 'viewer' && currLat && currLong">
             <mat-label class="text-center radio-label">Fill values: </mat-label>
             <mat-radio-group class="radio-group" #userRole required name="valuesType" [(ngModel)]="inputWay">
-              <mat-radio-button value = "2" >Manually</mat-radio-button>
-              <mat-radio-button value = "1" >Broadcast</mat-radio-button>
+              <mat-radio-button value = "1" >1. Broadcast</mat-radio-button>
+              <mat-radio-button value = "2" >2. Manually</mat-radio-button>
+             
             </mat-radio-group>
           </div>
-          <div *ngIf="userRole !== 'viewer' && currLat && currLong">
+
+          
+          <div *ngIf="userRole !== 'viewer' && currLat && currLong" class="form-field mb-1">
+            <button
+              mat-raised-button
+              class="secondary-color"
+              type="button"
+              [hidden]="inputWay == 2"
+              (click)="broadCastAqValues($event)"
+            >
+              Broadcast AQ values
+            </button>
+            <!-- <button
+              mat-raised-button
+              color="accent"
+              type="submit"
+              [disabled]="!myForm.valid"
+            >
+              Get the real time values
+            </button> -->
+          </div>
+          <div *ngIf="userRole !== 'viewer' && currLat && currLong" class="seperator">
             <div class="form-field" *ngFor="let item of parametersList">
               <mat-form-field appearance="outline">
                 <mat-label>{{ item.name }}</mat-label>
@@ -111,26 +139,6 @@
           </mat-card>
             </mat-form-field>
           </div> -->
-
-          <div *ngIf="userRole !== 'viewer' && currLat && currLong" class="form-field seperator">
-            <button
-              mat-raised-button
-              class="secondary-color"
-              type="button"
-              [hidden]="inputWay == 2"
-              (click)="broadCastAqValues($event)"
-            >
-              Broadcast AQ values
-            </button>
-            <!-- <button
-              mat-raised-button
-              color="accent"
-              type="submit"
-              [disabled]="!myForm.valid"
-            >
-              Get the real time values
-            </button> -->
-          </div>
           <div *ngIf="userRole !== 'viewer' && currLat && currLong" class="form-field seperator">
             <button
               mat-raised-button

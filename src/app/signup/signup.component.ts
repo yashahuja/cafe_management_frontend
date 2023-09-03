@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.role = 'contributer';
+    this.role = 'contributor';
   }
 
   public signup() {

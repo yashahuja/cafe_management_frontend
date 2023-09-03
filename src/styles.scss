@@ -17,6 +17,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
     font-size: 62.5%;
     padding: 0;
     margin: 0;
+    overflow: hidden;
     /* background-image: url(image/about-bg.jpg);
     background-size: cover;
     background-position: center;
@@ -46,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip{
-    background-color: $primary-2 !important;
+    background-color: rgba(77, 153, 143, 0.7)  !important;
     color: $light-text !important;
     border: 0.4rem solid $dark-text;
     h3, h1{
@@ -76,39 +77,43 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
 }
 
-.color-green-1{
+.color-good{
     background-color: #99d35c !important;
 }
-.color-green-2{
-    background-color: #15b45f !important;
-}
-.color-green-3{
-    background-color: #318e5b !important;
-    color: beige !important;
-}
-.color-yellow-1{
+// .color-green-2{
+//     background-color: #15b45f !important;
+// }
+// .color-green-3{
+//     background-color: #318e5b !important;
+//     color: beige !important;
+// }
+.color-fair{
     background-color: #fffa10 !important;
 }
-.color-yellow-2{
+.color-moderate{
     background-color: #ffc30f !important;
 }
-.color-yellow-3{
-    background-color: #e4791e !important;
-    color: beige !important;
-}
-.color-red-1{
+// .color-yellow-3{
+//     background-color: #e4791e !important;
+//     color: beige !important;
+// }
+.color-poor{
     background-color: #ff2d0e !important;
     color: beige !important;
 }
-.color-red-2{
-    background-color: #c7321e !important;
-    color: beige !important;
-}
-.color-red-3{
+// .color-red-2{
+//     background-color: #c7321e !important;
+//     color: beige !important;
+// }
+.color-very-poor{
     background-color: #791a14 !important;
     color: beige !important;
 }
-.color-purple-1{
-    background-color: #7031a0 !important;
-    color: beige !important;
+// .color-purple-1{
+//     background-color: #7031a0 !important;
+//     color: beige !important;
+// }
+
+.bold{
+    font-weight: 700 !important;
 }

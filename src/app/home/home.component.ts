@@ -16,17 +16,17 @@ import { AppSettings } from '../app.settings';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(private datePipe: DatePipe, private homeService: HomeService, private mapService: MapService,
-    private eventService: EventService){}
+    private eventService: EventService) { }
 
   ngOnDestroy() {
     this.userRole = '';
   }
 
-  user:any = {}
+  user: any = {}
   currLong: any;
   currLat: any;
-  currDate:any
-  currTime:any
+  currDate: any
+  currTime: any
   markersList: any;
   realTimeValues: any
   parametersList: any[] = [];
@@ -34,59 +34,61 @@ export class HomeComponent implements OnInit, OnDestroy {
   inputWay: any;
 
   ngOnInit() {
+    this.currLat = 0.00;
+    this.currLong = 0.00;
     this.getAllMarkers();
-    this.inputWay = InputWay.Manually.toString();
+    this.inputWay = InputWay.Broadcast.toString();
     this.user.firstName = '';
     this.user.pasword = '';
-    this.currDate =this.datePipe.transform((new Date), 'MM/dd/yyyy');
-    this.currTime =this.datePipe.transform((new Date), 'HH:mm:ss');
-    this.parametersList.push({name: 'AQI', value: ''});
-    this.parametersList.push({name: 'CO', value: ''});
-    this.parametersList.push({name: 'NO', value: ''});
-    this.parametersList.push({name: 'NO2', value: ''});
-    this.parametersList.push({name: 'O3', value: ''});
-    this.parametersList.push({name: 'SO2', value: ''});
-    this.parametersList.push({name: 'PM2_5', value: ''});
-    this.parametersList.push({name: 'PM10', value: ''});
-    this.parametersList.push({name: 'NH3', value: ''});
+    this.currDate = this.datePipe.transform((new Date), 'MM/dd/yyyy');
+    this.currTime = this.datePipe.transform((new Date), 'HH:mm:ss');
+    this.parametersList.push({ name: 'AQI', value: '' });
+    this.parametersList.push({ name: 'CO', value: '' });
+    this.parametersList.push({ name: 'NO', value: '' });
+    this.parametersList.push({ name: 'NO2', value: '' });
+    this.parametersList.push({ name: 'O3', value: '' });
+    this.parametersList.push({ name: 'SO2', value: '' });
+    this.parametersList.push({ name: 'PM2_5', value: '' });
+    this.parametersList.push({ name: 'PM10', value: '' });
+    this.parametersList.push({ name: 'NH3', value: '' });
     this.getUserRole();
-    }
+  }
 
   getUserRole() {
     // setTimeout(() => {
-      AuthService.role.subscribe((role: string)=>{
-        this.userRole = role;
-        if(this.userRole == 'viewer') {
-          this.getCurrentLocationCoordinates();
-        }
-      })
-      // this.userRole = localStorage.getItem('role');
-     
+    AuthService.role.subscribe((role: string) => {
+      this.userRole = role;
+      if (this.userRole == 'viewer') {
+        this.getCurrentLocationCoordinates();
+      }
+    })
+    // this.userRole = localStorage.getItem('role');
+
     // }, 1000);
   }
 
-    
-   public getCurrentLocationCoordinates(){
+
+  public getCurrentLocationCoordinates() {
     this.currLat = 0;
     this.currLong = 0;
-    if(!navigator.geolocation){
-        console.log("please allow location access");
-      }else{
-        navigator.geolocation.getCurrentPosition((pos)=>{
-          this.currLat  =  pos.coords.latitude;
-          this.currLong  = pos.coords.longitude;
-        }, err=>{
-            console.log(err);
-          });
-      }
-   }
+    if (!navigator.geolocation) {
+      console.log("please allow location access");
+    } else {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        this.currLat = parseFloat(pos.coords.latitude.toString()).toFixed(5);
+        this.currLong = parseFloat(pos.coords.longitude.toString()).toFixed(5);
+      }, err => {
+        console.log(err);
+      });
+    }
+  }
 
-   public goToYourCoordinates() {
-    if (this.userRole != 'contributer') {
-      const headerList = {'lat': this.currLat, 'lon': this.currLong};
-      this.homeService.getData(AppSettings.SearchAqiData, headerList).subscribe((res:any)=>{
+  public goToYourCoordinates() {
+    if (this.userRole != 'contributor') {
+      const headerList = { 'lat': this.currLat, 'lon': this.currLong };
+      this.homeService.getData(AppSettings.SearchAqiData, headerList).subscribe((res: any) => {
         const obj = res;
-        if(obj && obj.data) {
+        if (obj && obj.data) {
           this.mapService.flyTo(obj.data);
         } else {
           this.eventService.showSuccessMessage(res.message);
@@ -97,38 +99,45 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       });
     }
-   }
-   public broadCastAqValues(event: any){
+  }
+  public broadCastAqValues(event: any) {
     event.preventDefault();
     const headerList = {
       'lat': this.currLat,
       'long': this.currLong
     }
-      this.homeService.getData(AppSettings.GetAirQualityData, headerList).subscribe((res: any)=>{
-        if(res && res.list){
-          this.parametersList[0].value = res.list[0].main.aqi;
-          this.parametersList[1].value = res.list[0].components.co;
-          this.parametersList[2].value = res.list[0].components.no;
-          this.parametersList[3].value = res.list[0].components.no2;
-          this.parametersList[4].value = res.list[0].components.o3;
-          this.parametersList[5].value = res.list[0].components.so2;
-          this.parametersList[6].value = res.list[0].components.pm2_5;
-          this.parametersList[7].value = res.list[0].components.pm10;
-          this.parametersList[8].value = res.list[0].components.nh3;
-        }
-      });
-   }
-   public saveAndVisualize(){
+    this.homeService.getData(AppSettings.GetAirQualityData, headerList).subscribe((res: any) => {
+      if (res && res.list) {
+        this.parametersList[0].value = res.list[0].main.aqi;
+        this.parametersList[1].value = res.list[0].components.co;
+        this.parametersList[2].value = res.list[0].components.no;
+        this.parametersList[3].value = res.list[0].components.no2;
+        this.parametersList[4].value = res.list[0].components.o3;
+        this.parametersList[5].value = res.list[0].components.so2;
+        this.parametersList[6].value = res.list[0].components.pm2_5;
+        this.parametersList[7].value = res.list[0].components.pm10;
+        this.parametersList[8].value = res.list[0].components.nh3;
+      }
+    });
+  }
+  public saveAndVisualize() {
     // this.realTimeValues.date = this.currDate;
     // this.realTimeValues.time = this.currTime;
+
     if (!this.parametersList[0].value) {
       return;
     }
+
+    if(this.parametersList[0].value <= 0 || this.parametersList[0].value >5) {
+      this.eventService.showSuccessMessage("AQI can only take values from 1 to 5.");
+      return;
+    }
+
     const obj = {
       date: this.currDate,
       time: this.currTime,
-      lat: this.currLat,
-      lon: this.currLong,
+      lat: parseFloat(this.currLat),
+      lon: parseFloat(this.currLong),
       aqi: this.parametersList[0].value,
       co: this.parametersList[1].value,
       no: this.parametersList[2].value,
@@ -139,21 +148,25 @@ export class HomeComponent implements OnInit, OnDestroy {
       pm10: this.parametersList[7].value,
       nh3: this.parametersList[8].value,
     }
-    this.homeService.saveData(AppSettings.SaveAirQualityData, obj).subscribe((res: any)=>{
+    this.homeService.saveData(AppSettings.SaveAirQualityData, obj).subscribe((res: any) => {
       if (res && res.errorCode === 200) {
         this.getAllMarkers();
-        this.mapService.flyTo(obj);
-      } 
+        this.mapService.flyTo(res.data);
+      }
       this.eventService.showSuccessMessage(res.message);
       console.log(res.message);
       // this.mapService.refreshMarkers();
     });
-   }
+  }
 
-    public getAllMarkers(){
-      this.homeService.getData(AppSettings.GetLatestAirQualityReadings).subscribe((res: any)=>{
-        this.markersList = res.data;
-        // this.mapService.refreshMarkers('getAllAirQualityData');
-      });
-    }
+  public getAllMarkers() {
+    this.homeService.getData(AppSettings.GetLatestAirQualityReadings).subscribe((res: any) => {
+      this.markersList = res.data;
+      // this.mapService.refreshMarkers('getAllAirQualityData');
+    });
+  }
+  public formatLatLon(){
+    this.currLat = this.currLat ? parseFloat(this.currLat).toFixed(5) : this.currLat;
+    this.currLong = this.currLong ? parseFloat(this.currLong).toFixed(5) : this.currLong;
+  }
 }

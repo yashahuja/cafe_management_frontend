@@ -1,4 +1,8 @@
 <div class="container">
+  <!-- <video autoplay muted loop id="myVideo">
+    <source src="../../assets/videos/videoplayback.webm" type="video/mp4">
+    <source src="../../assets/videos/videoplayback.webm" type="video/mp4">
+  </video> -->
     <div class="card">
         <mat-card class="example-card">
             <mat-card-header>
@@ -27,15 +31,16 @@
                             class="secondary-color"
                             type="submit"
                           >
-                           Submit
+                           Login
                           </button>
+                        </div>
+                        <div>
                           <a
-                            mat-raised-button
-                            class="secondary-color"
-                            [routerLink]="'/forgotpassword'"
-                          >
-                           Forgot Password?
-                        </a>
+                         
+                          [routerLink]="'/forgotpassword'"
+                        >
+                         Forgot Password?
+                      </a>
                         </div>
                       </form>
                 </div>

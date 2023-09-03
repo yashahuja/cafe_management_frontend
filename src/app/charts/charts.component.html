@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
+  </div>
+  <div class="controls">
+    <form class="example-form">
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Search Lat-Long or Address</mat-label>
+        <input type="text" matInput [formControl]="myControl" [(ngModel)]="selectedCoords" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" >
+          <mat-option class="p-2" *ngFor="let item of filteredOptions | async" value = "{{('lat: '+item.lat+', '+'lon: '+item.lon+', '+'address: '+item.address)}}">
+            <span>lat: {{item.lat}}, lon: {{item.lon}}</span>
+            <div>Address: {{item.address}}</div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Select a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate name="start" [(ngModel)]="startDate" placeholder="Start date">
+          <input matEndDate name="end" [(ngModel)]="endDate" placeholder="End date">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="flex-item">
+        <mat-label>Select an air quality indicator</mat-label>
+        <mat-select [(value)]="featureType">
+          <mat-option value="1">AQI</mat-option>
+          <mat-option value="2">CO</mat-option>
+          <mat-option value="3">NO</mat-option>
+          <mat-option value="4">NO2</mat-option>
+          <mat-option value="5">O3</mat-option>
+          <mat-option value="6">SO2</mat-option>
+          <mat-option value="7">PM2.5</mat-option>
+          <mat-option value="8">PM10</mat-option>
+          <mat-option value="9">NH3</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button class="primary-color"
+      type="submit" [disabled]="!startDate || !endDate || !selectedCoords || !featureType" (click)="createChart()">
+        Create Chart
+      </button>
+  </div>
+</div>

@@ -1,46 +1,73 @@
 <div class="container">
-  <div class="chart-container">
-    <canvas id="chart"></canvas>
-  </div>
-  <div class="controls">
-    <form class="example-form">
-      <mat-form-field appearance="outline" class="flex-item">
-        <mat-label>Select Lat-Long</mat-label>
-        <input type="text" matInput [formControl]="myControl" [(ngModel)]="selectedCoords" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" >
-          <mat-option *ngFor="let item of filteredOptions | async" value = "{{('lat: '+item.lat+', '+'lon: '+item.lon)}}">
-            <span>lat: {{item.lat}}, lon: {{item.lon}}</span>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="flex-item">
-        <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate name="start" [(ngModel)]="startDate" placeholder="Start date">
-          <input matEndDate name="end" [(ngModel)]="endDate" placeholder="End date">
-        </mat-date-range-input>
-        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="flex-item">
-        <mat-label>Environmental Feature</mat-label>
-        <mat-select [(value)]="featureType">
-          <mat-option value="1">Aqi</mat-option>
-          <mat-option value="2">Co</mat-option>
-          <mat-option value="3">No</mat-option>
-          <mat-option value="4">No2</mat-option>
-          <mat-option value="5">O3</mat-option>
-          <mat-option value="6">SO2</mat-option>
-          <mat-option value="7">PM2_5</mat-option>
-          <mat-option value="8">PM10</mat-option>
-          <mat-option value="9">NH3</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-    <button mat-raised-button class="primary-color"
-      type="submit" [disabled]="!startDate || !endDate || !selectedCoords || !featureType" (click)="createChart()">
-        Create Chart
-      </button>
-  </div>
+    <div class="box">
+        <div>
+            <h1>Understanding Air Quality: A Comprehensive Guide</h1>
+<h2>Introduction</h2>
+<p>Air quality is a measure of the condition or cleanliness of the air we breathe. It's crucial to public health and the environment. This guide aims to help you understand key terms and concepts related to air quality, including the Air Quality Index (AQI) and common air pollutants.
+</p>
+<h2>What is Air Quality?
+</h2>
+<p>Air quality is determined by the presence of pollutants emitted from various sources like vehicles, factories, construction sites, and natural phenomena like wildfires. These pollutants can have both short-term and long-term health impacts, ranging from minor irritations to severe conditions like asthma and heart disease.
+</p>
+<h2>Air Quality Index (AQI)
+</h2>
+<p>The Air Quality Index is a standardized index used globally to understand and disseminate daily air quality levels to the public. It ranges from 0 to 500, where higher values represent worse air quality.
+</p>
+<h2>
+    AQI Bands
+</h2>
+<p> •	1 : Good (Green) - Air quality is considered satisfactory. <br>
+    •	2 : Fair (Yellow) - Air quality is acceptable. <br>
+    •	3 : Unhealthy for Sensitive Groups (Orange) - Risk of health issues for people with respiratory conditions. <br>
+    •	4 : Unhealthy (Red) - Increased likelihood of health effects for everyone. <br>
+    •	5 : Very Unhealthy (Maroon) - Health alert; the risk of health issues increased for everyone. <br>
+</p>
+<h2>Common Air Pollutants
+</h2>
+<div class="ml-2">
+    <h3>Particulate Matter (PM10 and PM2.5)
+    </h3>
+    <p>Tiny solid or liquid particles in the air that can include dust, dirt, soot, and smoke.
+    </p>
+</div>
+<div class="ml-2">
+    <h3>Nitrogen Dioxide (NO2)
+    </h3>
+    <p>A significant air pollutant and long-term exposure can lead to respiratory problems.
+    </p>
+</div>
+
+<div class="ml-2"><h3>Ozone (O3)</h3>
+    <p>A gas that can be good or bad depending on where it is. "Good" ozone occurs naturally about 10 to 30 miles above the Earth's surface and forms a layer that protects life on Earth from the sun's harmful rays.
+    </p></div>
+<div class="ml-2">
+    <h3>Carbon Monoxide (CO)
+    </h3>
+    <p>A colorless, odorless gas that can be harmful when inhaled in large amounts.
+    </p>
+</div>
+<div class="ml-2">
+    <h3>Sulfur Dioxide (SO2)
+    </h3>
+    <p>A gas produced by volcanic eruptions and industrial processes, primarily the burning of coal and oil at power plants and the refining of oil.
+    </p>
+</div>
+<div class="ml-2"><h3>Ammonia (NH3)
+</h3>
+<p>A compound of nitrogen and hydrogen that is a natural part of the environment but can also be produced by human activities, including wastewater treatment, and agricultural practices.
+</p></div>
+<h2>How to Protect Yourself
+</h2>
+<p> •	Keep track of AQI levels in your area. <br>
+    •	Limit outdoor activities during high AQI levels. <br>
+    •	Use air purifiers at home. <br>
+    •	Always consult with healthcare providers for a more personalized plan.
+</p>
+
+<h2>Conclusion
+</h2>
+<p>Understanding air quality and its components can help us make informed decisions for our well-being. Stay updated with real-time air quality information and take necessary precautions to protect yourself and your loved ones.
+</p>
+        </div>
+    </div>
 </div>

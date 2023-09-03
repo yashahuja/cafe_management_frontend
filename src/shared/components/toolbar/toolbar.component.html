@@ -14,6 +14,7 @@
           User</button>
          <mat-menu #menu="matMenu">
            <h2 class="display-name">{{ displayName | uppercase }}</h2>
+           <h2 class="display-name">Role: {{ userRole }}</h2>
            <button mat-menu-item>
             <a (click)="checkLogin('Logout')"
             mat-button>

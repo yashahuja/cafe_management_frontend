@@ -1,4 +1,7 @@
 <div class="container">
+  <!-- <video autoplay muted loop id="myVideo">
+    <source src="../../assets/videos/videoplayback.webm" type="video/mp4">
+  </video> -->
   <div class="card">
     <mat-card class="example-card">
       <mat-card-header>
@@ -67,10 +70,11 @@
                 name="role"
                 [(ngModel)]="role"
               >
-                <mat-radio-button value="contributer"
-                  >Contributer</mat-radio-button
+                <mat-radio-button value="contributor"
+                matTooltip="Contributor: Add real-time environmental data manually or via OpenWeather API."
+                  >Contributor</mat-radio-button
                 >
-                <mat-radio-button value="viewer">Viewer</mat-radio-button>
+                <mat-radio-button value="viewer" matTooltip="Viewer: View and interpret existing environmental data on the map.">Viewer</mat-radio-button>
               </mat-radio-group>
               <!-- </mat-form-field> -->
             </div>

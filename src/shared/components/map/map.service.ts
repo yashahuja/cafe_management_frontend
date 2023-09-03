@@ -41,20 +41,20 @@ export class MapService {
   //   }),
   // };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  public getIconColor(item: any): any{
-    switch(item.aqi){
+  public getIconColor(item: any): any {
+    switch (item.aqi) {
       case 1: return '#99d35c'
-      case 2: return '#15b45f'
-      case 3: return '#318e5b'
-      case 4: return '#fffa10'
-      case 5: return '#ffc30f'
-      case 6: return '#e4791e'
-      case 7: return '#ff2d0e'
-      case 8: return '#c7321e'
-      case 9: return '#791a14'
-      case 10: return '#7031a0'
+      case 2: return '#fffa10'
+      case 3: return '#ffc30f'
+      case 4: return '#ff2d0e'
+      case 5: return '#791a14'
+      // case 6: return '#e4791e'
+      // case 7: return '#ff2d0e'
+      // case 8: return '#c7321e'
+      // case 9: return '#791a14'
+      // case 10: return '#7031a0'
     }
   }
 
@@ -100,16 +100,16 @@ export class MapService {
     border-radius: 3rem 3rem 0;
     transform: rotate(45deg);
     border: 1px solid #FFFFFF`
-  
+
     let icon2 = L.divIcon({
-    className: "my-custom-pin",
-    iconAnchor: [0, 24],
-    labelAnchor: [-6, 0],
-    popupAnchor: [0, -36],
-    html: `<span style="${markerHtmlStyles}" />`
+      className: "my-custom-pin",
+      iconAnchor: [0, 24],
+      labelAnchor: [-6, 0],
+      popupAnchor: [0, -36],
+      html: `<span style="${markerHtmlStyles}" />`
     })
 
-    let marker = L.marker([item.lat, item.lon], {icon: icon2})
+    let marker = L.marker([item.lat, item.lon], { icon: icon2 })
       .bindPopup(
         `<mat-card class="card">
             <mat-card-header>
@@ -117,15 +117,16 @@ export class MapService {
               <mat-card-title><h1>Lon: ${item.lon}</h3></mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <h3>Date: ${item.date}</h3>
-              <h3>Time: ${item.time}</h3>
+              <h3 class="bold" *ngIf="item.address">Address: ${item.address}</h3>
+              <h3 class="bold">Date: ${item.date}</h3>
+              <h3 class="bold">Time: ${item.time}</h3>
               <h3>AQI: ${item.aqi}</h3>
               <h3>CO: ${item.co}</h3>
               <h3>NO: ${item.no}</h3>
               <h3>NO2: ${item.no2}</h3>
               <h3>O3: ${item.o3}</h3>
               <h3>SO2: ${item.so2}</h3>
-              <h3>PM2_5: ${item.pm2_5}</h3>
+              <h3>PM2.5: ${item.pm2_5}</h3>
               <h3>PM10: ${item.pm10}</h3>
               <h3>NH3: ${item.nh3}</h3>
             </mat-card-content>
@@ -133,19 +134,19 @@ export class MapService {
         { closeButton: false }
       )
       .addTo(this.map);
-      return marker;
+    return marker;
   }
 
-  public flyTo(item: any, openPopup: boolean=true) {
-    this.map.flyTo([item.lat, item.lon], 10, {
+  public flyTo(item: any, openPopup: boolean = true) {
+    this.map.flyTo([item.lat, item.lon], 15, {
       duration: 2,
     });
 
-    setTimeout(()=>{
-      if(openPopup) {
+    setTimeout(() => {
+      if (openPopup) {
         this.addMarker(item).openPopup();
       }
-    },2000)
+    }, 2000)
   }
   // public refreshMarkers(url: string){
   //   this.getData(url).subscribe((res: any)=>{

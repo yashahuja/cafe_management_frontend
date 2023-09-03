@@ -14,6 +14,7 @@ export class ToolbarComponent implements OnInit, AfterViewChecked {
   loggedinMenus : any[] = [];
   loggedOutMenus : any[] = [];
   @Input() isUserLoggedIn: boolean = false;
+  userRole: string;
 
   constructor(private router: Router, private authService: AuthService){}
   ngAfterViewChecked(): void {
@@ -21,6 +22,7 @@ export class ToolbarComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
+    this.getUserRole();
     this.links = [];
     // this.checkLogin(null);
     this.isLoggedIn = false;
@@ -69,5 +71,15 @@ export class ToolbarComponent implements OnInit, AfterViewChecked {
       this.displayName = JSON.parse(localStorage.getItem("user"))?.displayName;
     }
     this.links = this.isLoggedIn ? this.loggedinMenus : this.loggedOutMenus;
+  }
+
+  getUserRole() {
+    // setTimeout(() => {
+    AuthService.role.subscribe((role: string) => {
+      this.userRole = role;
+    })
+    // this.userRole = localStorage.getItem('role');
+
+    // }, 1000);
   }
 }

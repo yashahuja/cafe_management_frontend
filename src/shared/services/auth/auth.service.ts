@@ -39,8 +39,8 @@ export class AuthService {
           clearTimeout(this.sessionId);
         }
         if (!res.user.emailVerified) {
-          // this.router.navigate(['/verify-email']);
-          // return;
+          this.router.navigate(['/verify-email']);
+          return;
         }
 
         localStorage.setItem('user', JSON.stringify(res.user));
@@ -121,7 +121,7 @@ export class AuthService {
         );
         this.router.navigate(['/verify-email']);
       },
-      (err) => {
+      (err: any) => {
         this.eventService.showSuccessMessage('Something went wrong '+err.message);
       }
     );

@@ -1,0 +1,33 @@
+@import '../../variable';
+
+.container{
+    width: 80vw;
+    height: 80%;
+    margin: auto;
+    // background-color: red;
+    .chart-container{
+        height: 80%;
+        margin: auto;
+        canvas{
+            margin: auto;
+            height: 100%;
+        }
+    }
+
+    .controls{
+        margin-top: 2rem;
+        text-align: center;
+        .flex-item{
+            margin: 2rem;
+            width: 27%;
+        }
+
+        button{
+            color: $light-text;
+        }
+    }
+}
+
+.p-2{
+    padding: 1rem !important;
+}

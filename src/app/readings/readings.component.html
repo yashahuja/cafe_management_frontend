@@ -33,6 +33,7 @@
           <mat-option value="(all)">(All)</mat-option>
           <mat-option value="good">Good</mat-option>
           <mat-option value="fair">Fair</mat-option>
+          <mat-option value="moderate">Moderate</mat-option>
           <mat-option value="poor">Poor</mat-option>
           <mat-option value="veryPoor">Very Poor</mat-option>
           
@@ -40,23 +41,29 @@
       </mat-form-field>
         </div>
         <mat-card class="card" *ngFor="let item of markersList; let i = index" (click)="flyOnMap(item)"
-        [ngClass]="{'color-green-1': item.aqi == 1, 'color-green-2': item.aqi == 2,'color-green-3': item.aqi == 3,
-        'color-yellow-1': item.aqi == 4, 'color-yellow-2': item.aqi == 5, 'color-yellow-3': item.aqi == 6, 
-        'color-red-1': item.aqi == 7,'color-red-2': item.aqi == 8,'color-red-3': item.aqi == 9, 'color-purple-1': item.aqi == 10 }">
+        [ngClass]="{'color-good': item.aqi == 1, 'color-fair': item.aqi == 2,'color-moderate': item.aqi == 3,
+        'color-poor': item.aqi == 4, 'color-very-poor': item.aqi == 5
+         }">
+         <!-- <div>
+          ,'color-yellow-3': item.aqi == 6, 'color-red-1': item.aqi == 7,
+          'color-red-2': item.aqi == 8,'color-red-3': item.aqi == 9,
+          'color-purple-1': item.aqi == 10
+         </div> -->
           <mat-card-header>
-            <mat-card-title>Lat {{ item.lat }}</mat-card-title>
-            <mat-card-title>Long {{ item.lon }}</mat-card-title>
+            <mat-card-title>Latitude: {{ item.lat }}</mat-card-title>
+            <mat-card-title>Longitude: {{ item.lon }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <h3>Date: {{ item.date }}</h3>
-            <h3>Time: {{ item.time }}</h3>
+            <h3 class="bold" *ngIf="item.address">Address: {{ item.address }}</h3>
+            <h3 class="bold">Date: {{ item.date }}</h3>
+            <h3 class="bold">Time: {{ item.time }}</h3>
             <h3>AQI: {{ item.aqi }}</h3>
             <h3>CO: {{ item.co }}</h3>
             <h3>NO: {{ item.no }}</h3>
             <h3>NO2: {{ item.no2 }}</h3>
             <h3>O3: {{ item.o3 }}</h3>
             <h3>SO2: {{ item.so2 }}</h3>
-            <h3>PM2_5: {{ item.pm2_5 }}</h3>
+            <h3>PM2.5: {{ item.pm2_5 }}</h3>
             <h3>PM10: {{ item.pm10 }}</h3>
             <h3>NH3: {{ item.nh3 }}</h3>
           </mat-card-content>
