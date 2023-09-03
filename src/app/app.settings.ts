@@ -2,9 +2,9 @@ export class AppSettings {
   private static restApiPath: string;
 
   public static setAppConfig() {
-    this.restApiPath = 'https://iem-app.onrender.com/';
-    if(window.location.origin.includes('localhost')){
-        this.restApiPath = 'http://localhost:4000/';
+    this.restApiPath = 'https://cafe-management-be-0y4f.onrender.com';
+    if (window.location.origin.includes('localhost')) {
+      this.restApiPath = 'http://localhost:4000/';
     }
   }
 
